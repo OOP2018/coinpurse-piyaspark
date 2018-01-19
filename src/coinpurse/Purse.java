@@ -1,30 +1,33 @@
 package coinpurse;
- 
-//TODO import List, ArrayList, and Collections
+
 // You will use Collections.sort() to sort the coins
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
 
 /**
  *  A coin purse contains coins.
  *  You can insert coins, withdraw money, check the balance,
  *  and check if the purse is full.
- *  
- *  @author your name
+ *
+ *  @author Piyaphol Wiengperm.
  */
 public class Purse {
     /** Collection of objects in the purse. */
-    //TODO declare a List of Coins named "money".
-    
+    private List<Coin> money = new ArrayList<>();
+
     /** Capacity is maximum number of items the purse can hold.
      *  Capacity is set when the purse is created and cannot be changed.
      */
     private final int capacity;
-    
-    /** 
+
+    /**
      *  Create a purse with a specified capacity.
      *  @param capacity is maximum number of coins you can put in purse.
      */
     public Purse( int capacity ) {
-
+        this.capacity = capacity;
     }
 
     /**
@@ -32,38 +35,41 @@ public class Purse {
      * This is the number of coins, not their value.
      * @return the number of coins in the purse
      */
-    public int count() { return 0; }
-    
-    /** 
+    public int count() { return money.size(); }
+
+    /**
      *  Get the total value of all items in the purse.
      *  @return the total value of items in the purse.
      */
     public double getBalance() {
-		return 0.0; 
+        double balance = 0;
+        for ( Coin m : money){
+            balance += m.getValue();
+        }
+		return balance;
 	}
 
-    
+
     /**
      * Return the capacity of the coin purse.
      * @return the capacity
      */
-    //TODO write accessor method for capacity. Use Java naming convention.
-    public int getCapacity() { 
-		return 0; 
+    public int getCapacity() {
+		return capacity;
 	}
-    
-    /** 
+
+    /**
      *  Test whether the purse is full.
      *  The purse is full if number of items in purse equals
      *  or greater than the purse capacity.
      *  @return true if purse is full.
      */
     public boolean isFull() {
-        //TODO complete this method. Avoid writing duplicate code (Don't Repeat Yourself).
+        if(count()==capacity)return true;
         return false;
     }
 
-    /** 
+    /**
      * Insert a coin into the purse.
      * The coin is only inserted if the purse has space for it
      * and the coin has positive value.  No worthless coins!
@@ -72,44 +78,57 @@ public class Purse {
      */
     public boolean insert( Coin coin ) {
         // if the purse is already full then can't insert anything.
-        //TODO complete the insert method
-        return false;
+        if(isFull())return false;
+        else if(coin.getValue()<=0)return false;
+        else money.add(coin);
+        return true;
     }
-    
-    /**  
+
+    /**
      *  Withdraw the requested amount of money.
      *  Return an array of Coins withdrawn from purse,
      *  or return null if cannot withdraw the amount requested.
-     *  @param amount is the amount to withdraw
-     *  @return array of Coin objects for money withdrawn, 
+     *  @param amountNeededToWithdraw is the amount to withdraw
+     *  @return array of Coin objects for money withdrawn,
 	 *    or null if cannot withdraw requested amount.
      */
-    public Coin[] withdraw( double amount ) {
-        //TODO don't allow to withdraw amount < 0
-        
-	   /*
-		* See lab sheet for outline of a solution, 
+    public Coin[] withdraw( double amountNeededToWithdraw ) {
+        List<Coin> templist = new ArrayList<>();
+        /*
+		* See lab sheet for outline of a solution,
 		* or devise your own solution.
 		* The idea is to be greedy.
 		* Try to withdraw the largest coins possible.
 		* Each time you choose a coin as a candidate for
 		* withdraw, add it to a temporary list and
 		* decrease the amount (remainder) to withdraw.
-		* 
+		*
 		* If you reach a point where amountNeededToWithdraw == 0
 		* then you found a solution!
 		* Now, use the temporary list to remove coins
 		* from the money list, and return the temporary
 		* list (as an array).
 		*/
-		
-		// Did we get the full amount?
+        java.util.Collections.sort(money);
+        java.util.Collections.reverse(money);
+        for (Coin m : money)templist.add(m);
+        for (int i = 0;i<templist.size();i++){
+                if(amountNeededToWithdraw - templist.get(i).getValue()>=0){
+                    templist.add(money.get(i));
+                    amountNeededToWithdraw -= money.get(i).getValue();
+                    money.remove(i);
+            }else break;
+        }
+
+
+
+        // Did we get the full amount?
 		// This code assumes you decrease amount each time you remove a coin.
     	// Your code might use some other variable for the remaining amount to withdraw.
 		if ( amountNeededToWithdraw != 0 )
-		{	
-			// failed. Don't change the contents of the purse.
-			
+		{   // failed. Don't change the contents of the purse.
+		    money.addAll(templist);
+            return null;
 		}
 
 		// Success.
@@ -117,17 +136,16 @@ public class Purse {
 		// and return them as an array.
 		// Use list.toArray( array[] ) to copy a list into an array.
 		// toArray returns a reference to the array itself.
-        return new Coin[0]; //TODO replace this with real code
+        Coin[] money = new Coin[templist.size()];
+        return templist.toArray(money) ;
 	}
-  
-    /** 
+
+    /**
      * toString returns a string description of the purse contents.
      * It can return whatever is a useful description.
      */
     public String toString() {
-        //TODO complete this
-    	return "you forgot to write Purse.toString()";
+    	return String.format("%d coins with value %f",count(),getBalance());
     }
 
 }
-//TODO When you finish, there should not be any TODO comments, including this one!
