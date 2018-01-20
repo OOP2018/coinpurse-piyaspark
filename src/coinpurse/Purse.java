@@ -15,7 +15,7 @@ import java.util.Collections;
  */
 public class Purse {
     /** Collection of objects in the purse. */
-    private List<Coin> money = new ArrayList<>();
+    private List<Coin> money;
 
     /** Capacity is maximum number of items the purse can hold.
      *  Capacity is set when the purse is created and cannot be changed.
@@ -28,6 +28,7 @@ public class Purse {
      */
     public Purse( int capacity ) {
         this.capacity = capacity;
+        this.money = new ArrayList<>();
     }
 
     /**
@@ -111,27 +112,21 @@ public class Purse {
 		*/
         java.util.Collections.sort(money);
         java.util.Collections.reverse(money);
-        for (Coin m : money)templist.add(m);
-        for (int i = 0;i<templist.size();i++){
-                if(amountNeededToWithdraw - templist.get(i).getValue()>=0){
-                    templist.add(money.get(i));
-                    amountNeededToWithdraw -= money.get(i).getValue();
-                    money.remove(i);
-            }else break;
+        for (Coin c : money){
+                if(amountNeededToWithdraw - c.getValue()>=0){
+                    amountNeededToWithdraw -= c.getValue();
+                    templist.add(c);
+            }
         }
-
-
 
         // Did we get the full amount?
 		// This code assumes you decrease amount each time you remove a coin.
     	// Your code might use some other variable for the remaining amount to withdraw.
-		if ( amountNeededToWithdraw != 0 )
-		{   // failed. Don't change the contents of the purse.
-		    money.addAll(templist);
-            return null;
-		}
+		if ( amountNeededToWithdraw != 0 ) return null;
+		   // failed. Don't change the contents of the purse.
+        for (Coin c : templist) money.remove(c);
 
-		// Success.
+        // Success.
 		// Remove the coins you want to withdraw from purse,
 		// and return them as an array.
 		// Use list.toArray( array[] ) to copy a list into an array.
