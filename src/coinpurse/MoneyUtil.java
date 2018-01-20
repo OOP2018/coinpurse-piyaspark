@@ -1,22 +1,20 @@
 package coinpurse;
 
+/**
+ * MoneyUtil is use to test Coin class.
+ *
+ * @author Piyaphol Wiengperm.
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MoneyUtil {
-    private static MoneyUtil ourInstance = new MoneyUtil();
 
-    public static MoneyUtil getInstance() {
-        return ourInstance;
-    }
-
-    private MoneyUtil() {
-    }
-
-    public void sortCoins(List<Coin> coin){
-
-    }
-
+    /**
+     * print all coin that added.
+     * @param coin is object that represent a coin which contains value and currency.
+     */
     public static void printCoins(List<Coin> coin){
         for (Coin c : coin) {
             System.out.println(c.toString());

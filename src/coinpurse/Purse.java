@@ -5,7 +5,6 @@ package coinpurse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
-
 /**
  *  A coin purse contains coins.
  *  You can insert coins, withdraw money, check the balance,
@@ -110,8 +109,8 @@ public class Purse {
 		* from the money list, and return the temporary
 		* list (as an array).
 		*/
-        java.util.Collections.sort(money);
-        java.util.Collections.reverse(money);
+        Collections.sort(money);
+        Collections.reverse(money);
         for (Coin c : money){
                 if(amountNeededToWithdraw - c.getValue()>=0){
                     amountNeededToWithdraw -= c.getValue();
