@@ -21,7 +21,7 @@ public class Coin implements Comparable<Coin>{
     }
 
     /**
-     *
+     * get value for usage.
      * @return value.
      */
     public double getValue() {
@@ -29,7 +29,7 @@ public class Coin implements Comparable<Coin>{
     }
 
     /**
-     *
+     * get value for usage.
      * @return currency.
      */
     public String getCurrency() {
@@ -38,7 +38,7 @@ public class Coin implements Comparable<Coin>{
 
     /**
      * check two coins are equal if they have the same value and same currency.
-     * @param arg
+     * @param arg is other object.
      * @return boolean
      */
     @Override
@@ -51,7 +51,7 @@ public class Coin implements Comparable<Coin>{
 
     /**
      * compare two coins for check which coin have more value.
-     * @param coin
+     * @param coin for comparing.
      * @return integer.
      */
     public int compareTo(Coin coin) {
@@ -60,6 +60,10 @@ public class Coin implements Comparable<Coin>{
         else return 0;
     }
 
+    /**
+     * String format that contains value and currency.
+     * @return format of string.
+     */
     @Override
     public String toString() {
         return String.format("%f-%s", value, currency);

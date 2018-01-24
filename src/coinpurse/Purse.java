@@ -77,7 +77,6 @@ public class Purse {
      * @return true if coin inserted, false if can't insert
      */
     public boolean insert( Coin coin ) {
-        // if the purse is already full then can't insert anything.
         if(isFull())return false;
         else if(coin.getValue()<=0)return false;
         else money.add(coin);
@@ -118,18 +117,8 @@ public class Purse {
             }
         }
 
-        // Did we get the full amount?
-		// This code assumes you decrease amount each time you remove a coin.
-    	// Your code might use some other variable for the remaining amount to withdraw.
 		if ( amountNeededToWithdraw != 0 ) return null;
-		   // failed. Don't change the contents of the purse.
         for (Coin c : templist) money.remove(c);
-
-        // Success.
-		// Remove the coins you want to withdraw from purse,
-		// and return them as an array.
-		// Use list.toArray( array[] ) to copy a list into an array.
-		// toArray returns a reference to the array itself.
         Coin[] money = new Coin[templist.size()];
         return templist.toArray(money) ;
 	}
