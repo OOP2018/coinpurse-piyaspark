@@ -108,13 +108,13 @@ public class ConsoleDialog {
 
         if ( scanline.hasNextDouble() ) {
              double amount = scanline.nextDouble( );
-             Coin [] coins = purse.withdraw(amount);
-             if ( coins == null )
+             Valuable[] value = purse.withdraw(amount);
+             if ( value == null )
                 System.out.printf("Sorry, couldn't withdraw %.2g %s\n", amount, CURRENCY);
              else {
                 System.out.print("You withdrew:");
-                for(int k=0; k<coins.length; k++) {
-                	System.out.print((k==0?" ":", ") + coins[k].toString() );
+                for(int k=0; k<value.length; k++) {
+                	System.out.print((k==0?" ":", ") + value[k].toString() );
                 }
                 System.out.println();
             }

@@ -1,60 +1,66 @@
 package coinpurse;
 
 /**
- * MoneyUtil is use to test Coin class.
+ * MoneyUtil is use to test Coin and Banknote class.
  *
  * @author Piyaphol Wiengperm.
  */
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class MoneyUtil {
 
     /**
      * print all coin that added.
-     * @param coin is object that represent a coin which contains value and currency.
+     * @param value is object that represent a coin which contains value and currency.
      */
-    public static void printCoins(List<Coin> coin){
-        for (Coin c : coin) {
-            System.out.println(c.toString());
+    public static void printValue(List<Valuable> value){
+        for (Valuable v : value) {
+            System.out.println(v.toString());
         }
     }
 
     /**
-     * the filter for choosing coins with the same currency as the example.
-     * @param coins is all coins that in the list.
+     * the filter for choosing valuable with the same currency as the example.
+     * @param value is all values that in the list.
      * @param currency is the currency you want to choose.
-     * @return coins with the same currency.
+     * @return value with the same currency.
      */
-    public static List<Coin> filterByCurrency(List<Coin> coins,String currency){
-        List<Coin> sameCoins = new ArrayList<>();
-        for (Coin c : coins) {
-            if (c.getCurrency().contains(currency))sameCoins.add(c);
+    public static List<Valuable> filterByCurrency(List<Valuable> value, String currency){
+        List<Valuable> sameCurrency = new ArrayList<>();
+        for (Valuable v : value) {
+            if (v.getCurrency().contains(currency))sameCurrency.add(v);
             else continue;
         }
-        return sameCoins;
+        return sameCurrency;
     }
 
     /**
-     * sort coins in the list by highest to lowest.
-     * @param coins is all coins that in the list.
+     * sort value in the list by highest to lowest.
+     * @param value is all value that in the list.
      */
-    public static void sortCoins(List<Coin> coins){
-        java.util.Collections.sort(coins);
+    public static void sortValue(List<Valuable> value){
+        Comparator<Valuable> comp = new ValueComparator();
+        value.sort(comp);
     }
 
     public static void main(String[] args) {
-        List<Coin> coins = new ArrayList<Coin>();
-        coins.add(new Coin(10.0,"Baht"));
-        coins.add(new Coin(0.5,"Baht"));
-        coins.add(new Coin(2.0,"Baht"));
-        coins.add(new Coin(1.0,"Baht"));
-        printCoins(coins);
-        sortCoins(coins);
-        printCoins(coins);
+        List<Valuable> value = new ArrayList<Valuable>();
+        value.add(new Coin(10.0,"Baht"));
+        value.add(new Coin(0.5,"Baht"));
+        value.add(new Coin(2.0,"Baht"));
+        value.add(new Coin(1.0,"Baht"));
+        value.add(new BankNote(50,"Dollar"));
+        value.add(new BankNote(100,"Dollar"));
+        value.add(new BankNote(1000,"Dollar"));
 
-        printCoins(filterByCurrency(coins,"Baht"));
+        printValue(value);
+        sortValue(value);
+        printValue(value);
+
+        printValue(filterByCurrency(value,"Dollar"));
 
     }
 }

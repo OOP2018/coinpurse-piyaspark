@@ -1,39 +1,51 @@
 package coinpurse;
 
 /**
- *
- * Coins represent value and currency of coin.
+ * BankNote represent value and currency of banknote.
  * @author Piyaphol Wiengperm.
  */
-public class Coin implements Valuable{
+
+public class BankNote implements Valuable{
     private double value;
     private String currency;
+    private long serialNumber;
+    private static long nextSerialNumber = 1000000;
 
     /**
-     * a constructor for coin.
+     * a constructor for BankNote.
      * @param value is value of the coin such as 1,2,5,10.
      * @param currency is currency of the such as Baht,Dollars,Yen.
+     * banknote will have unique serial number that start at 10000000.
      */
-    public Coin(double value, String currency) {
-        if (value < 0) return;
+    public BankNote(double value,String currency){
         this.value = value;
         this.currency = currency;
+        this.serialNumber = nextSerialNumber;
+        nextSerialNumber++;
     }
 
     /**
-     * get value for usage.
-     * @return value.
+     * get value of banknote.
+     * @return value of banknote.
      */
-    public double getValue() {
+    public double getValue(){
         return value;
     }
 
     /**
-     * get value for usage.
-     * @return currency.
+     * get currency of banknote.
+     * @return currency of banknote.
      */
     public String getCurrency() {
         return currency;
+    }
+
+    /**
+     * get unique serial number of banknote.
+     * @return serial number of banknote.
+     */
+    public long getSerial() {
+        return serialNumber;
     }
 
     /**
@@ -45,19 +57,8 @@ public class Coin implements Valuable{
     public boolean equals(Object arg) {
         if (this == arg) return true;
         if (arg == null || this.getClass() != arg.getClass()) return false;
-        Coin other = (Coin) arg;
+        BankNote other = (BankNote) arg;
         return this.value == other.value && this.currency == other.currency;
-    }
-
-    /**
-     * compare two coins for check which coin have more value.
-     * @param coin for comparing.
-     * @return integer.
-     */
-    public int compareTo(Coin coin) {
-        if(this.value - coin.getValue() < 0)return -1;
-        else if(this.value - coin.getValue() > 0)return 1;
-        else return 0;
     }
 
     /**
@@ -66,7 +67,6 @@ public class Coin implements Valuable{
      */
     @Override
     public String toString() {
-        return String.format("%f-%s", value, currency);
+        return String.format("%.0f-%s note [%d]",value,currency, serialNumber);
     }
-
 }
