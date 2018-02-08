@@ -12,6 +12,8 @@ import java.util.Comparator;
  *  @author Piyaphol Wiengperm.
  */
 public class Purse {
+    private Comparator<Valuable> comp = new ValueComparator();
+
     /** Collection of objects in the purse. */
     private List<Valuable> money;
 
@@ -92,7 +94,6 @@ public class Purse {
      */
     public Valuable[] withdraw( double amountNeededToWithdraw ) {
         List<Valuable> templist = new ArrayList<>();
-        Comparator<Valuable> comp = new ValueComparator();
         money.sort(comp);
         Collections.reverse(money);
         for (Valuable v : money){
@@ -113,8 +114,7 @@ public class Purse {
      * It can return whatever is a useful description.
      */
     public String toString() {
-    	return String.format("%d coins with value %f",count(),getBalance());
+    	return String.format("%d money with value %f",count(),getBalance());
     }
-
 }
 

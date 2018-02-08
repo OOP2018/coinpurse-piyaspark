@@ -6,6 +6,8 @@ import java.util.Comparator;
  * Compare two objects that implement Valuable.
  * First compare them by currency, so that "Baht" < "Dollar".
  * If both objects have the same currency, order them by value.
+ *
+ * @author Piyaphol Wiengperm.
  */
 
 public class ValueComparator implements Comparator<Valuable> {
@@ -22,6 +24,8 @@ public class ValueComparator implements Comparator<Valuable> {
             else if(a.getValue() > b.getValue())return 1;
             else return 0;
         } else {
+            if(a.getCurrency().compareTo(b.getCurrency())>0)return 1;
+            if(a.getCurrency().compareTo(b.getCurrency())<0)return -1;
             return 0;
         }
 

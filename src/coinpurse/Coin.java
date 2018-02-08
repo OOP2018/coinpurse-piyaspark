@@ -46,18 +46,7 @@ public class Coin implements Valuable{
         if (this == arg) return true;
         if (arg == null || this.getClass() != arg.getClass()) return false;
         Coin other = (Coin) arg;
-        return this.value == other.value && this.currency == other.currency;
-    }
-
-    /**
-     * compare two coins for check which coin have more value.
-     * @param coin for comparing.
-     * @return integer.
-     */
-    public int compareTo(Coin coin) {
-        if(this.value - coin.getValue() < 0)return -1;
-        else if(this.value - coin.getValue() > 0)return 1;
-        else return 0;
+        return this.value == other.value && this.currency.equals(other.currency);
     }
 
     /**

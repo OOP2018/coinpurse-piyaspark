@@ -7,6 +7,8 @@ import java.util.Scanner;
  * This class provides simple interactive dialog for inserting
  * and removing money to/from the purse, and displaying the
  * balance.
+ *
+ * @author Piyaphol Wiengperm.
  */
 public class ConsoleDialog {
 	// default currency for this dialog
@@ -82,7 +84,7 @@ public class ConsoleDialog {
         Scanner scanline = new Scanner(inline);
         while( scanline.hasNextDouble() ) {
             double value = scanline.nextDouble();
-            Coin coin = makeMoney(value);
+            Valuable coin = makeMoney(value);
             System.out.printf("Deposit %s... ", coin.toString() );
             boolean ok = purse.insert(coin);
             System.out.println( (ok? "ok" : "FAILED") );
@@ -124,7 +126,8 @@ public class ConsoleDialog {
     }
 
     /** Make a Coin (or BankNote or whatever) using requested value. */
-    private Coin makeMoney(double value) {
+    private Valuable makeMoney(double value) {
+        if(value>=20)return new BankNote(value,CURRENCY);
     	return new Coin(value, CURRENCY);
     }
 
