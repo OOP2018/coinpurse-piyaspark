@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 /**
  *  A money purse contains coins and banknotes.
- *  You can insert coins or banknotes, withdraw money, check the balance,
+ *  You can insert money, withdraw money, check the balance,
  *  and check if the purse is full.
  *
  *  @author Piyaphol Wiengperm.
@@ -32,9 +32,9 @@ public class Purse {
     }
 
     /**
-     * Count and return the number of coins and banknotes in the purse.
+     * Count and return money in the purse.
      * This is the number of coins and banknotes, not their value.
-     * @return the number of coins and banknotes in the purse
+     * @return money in the purse
      */
     public int count() { return money.size(); }
 
@@ -71,7 +71,7 @@ public class Purse {
     }
 
     /**
-     * Insert a coin or banknote into the purse.
+     * Insert money into the purse.
      * The money is only inserted if the purse has space for it
      * and the value has positive value.  No worthless value!
      * @param value is a value object to insert into purse
@@ -101,7 +101,7 @@ public class Purse {
         Collections.reverse(money);
 
         for(int i = 0;i<=money.size()-1;i++){
-            if(amountNeededToWithdraw>=0){
+            if(amountNeededToWithdraw>0){
             if (money.get(i).getCurrency().equalsIgnoreCase(amount.getCurrency())){
                 if(amountNeededToWithdraw - money.get(i).getValue()>=0) {
                     amountNeededToWithdraw -= money.get(i).getValue();

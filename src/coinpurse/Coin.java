@@ -6,8 +6,7 @@ package coinpurse;
  * @author Piyaphol Wiengperm.
  */
 public class Coin extends Money{
-    private double value;
-    private String currency;
+
 
     /**
      * a constructor for coin.
@@ -25,7 +24,7 @@ public class Coin extends Money{
      */
 
     public String toString() {
-        return String.format("%f-%s", value, currency);
+        return String.format("%f-%s", this.getValue(), this.getCurrency());
     }
 
 }

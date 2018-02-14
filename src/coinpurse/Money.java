@@ -1,24 +1,44 @@
 package coinpurse;
 
-import coinpurse.Valuable;
-
+/**
+ * Money contains coin and banknotes.
+ * @author Piyaphol Wiengperm
+ */
 public class Money implements Valuable{
     private double value;
     private String currency;
 
+    /**
+     * The constructor for money that have value and currency.
+     * @param value is value of money such as 10,50,100.
+     * @param currency is currency of money such as "Baht","Dollar","Yen".
+     */
     public Money(double value,String currency){
         this.value = value;
         this.currency = currency;
     }
 
+    /**
+     * Get a value of money.
+     * @return value of money.
+     */
     public double getValue() {
         return value;
     }
 
+    /**
+     * Get a currency of money.
+     * @return currency of money.
+     */
     public String getCurrency() {
         return currency;
     }
 
+    /**
+     * Compare two value of money.
+     * @param o is money.
+     * @return integer.
+     */
     public int compareTo(Valuable o){
         return Double.compare(this.value,o.getValue());
     }
@@ -26,7 +46,7 @@ public class Money implements Valuable{
     /**
      * check two coins are equal if they have the same value and same currency.
      * @param arg is other object.
-     * @return boolean
+     * @return boolean.
      */
     public boolean equals(Object arg) {
         if (this == arg) return true;

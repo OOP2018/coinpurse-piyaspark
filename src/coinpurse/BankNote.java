@@ -6,8 +6,6 @@ package coinpurse;
  */
 
 public class BankNote extends Money{
-    private double value;
-    private String currency;
     private long serialNumber;
     private static long nextSerialNumber = 1000000;
 
@@ -36,6 +34,6 @@ public class BankNote extends Money{
      * @return format of string.
      */
     public String toString() {
-        return String.format("%.0f-%s note [%d]",value,currency, serialNumber);
+        return String.format("%.0f-%s note [%d]",this.getValue(),this.getCurrency(), serialNumber);
     }
 }
