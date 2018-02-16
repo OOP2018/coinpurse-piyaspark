@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Collections;
 import java.util.Comparator;
 /**
- *  A money purse contains coins and banknotes.
+ *  A purse contains money.
  *  You can insert money, withdraw money, check the balance,
  *  and check if the purse is full.
  *
@@ -24,7 +24,7 @@ public class Purse {
 
     /**
      *  Create a purse with a specified capacity.
-     *  @param capacity is maximum number of coins and banknotes you can put in purse.
+     *  @param capacity is maximum money you can put in purse.
      */
     public Purse( int capacity ) {
         this.capacity = capacity;
@@ -33,7 +33,7 @@ public class Purse {
 
     /**
      * Count and return money in the purse.
-     * This is the number of coins and banknotes, not their value.
+     * This is the number of money, not their value.
      * @return money in the purse
      */
     public int count() { return money.size(); }
@@ -93,9 +93,9 @@ public class Purse {
 	 *    or null if cannot withdraw requested amount.
      */
     public Valuable[] withdraw(Valuable amount) {
+        if(amount == null)return null;
+        if(amount.getValue() < 0 || this.getBalance() < amount.getValue())return null;
         double amountNeededToWithdraw = amount.getValue();
-        if(amountNeededToWithdraw < 0 || this.getBalance() < amountNeededToWithdraw)return null;
-
         List<Valuable> templist = new ArrayList<>();
         money.sort(comp);
         Collections.reverse(money);
