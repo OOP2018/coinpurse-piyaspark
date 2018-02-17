@@ -1,11 +1,13 @@
 package coinpurse;
 
+/**
+ * MoneyFactory is class that create money for use.
+ * @author Piyaphol Wiengperm.
+ */
 public abstract class MoneyFactory {
     private static MoneyFactory instance = null;
 
-    protected MoneyFactory(){
-
-    }
+    protected MoneyFactory(){ }
 
     public static MoneyFactory getInstance(){
         return instance;
@@ -13,6 +15,12 @@ public abstract class MoneyFactory {
 
     public abstract Valuable createMoney(double value);
 
+    /**
+     * Create money by parsing String value to double value.
+     * If it can't create then throw an exception.
+     * @param value is value of money in type of String.
+     * @return Valuable.
+     */
     public Valuable createMoney(String value){
         double doubleValue = 0;
         try {
@@ -22,6 +30,7 @@ public abstract class MoneyFactory {
         }
         return createMoney(doubleValue);
     }
+
 
     public static void setFactory(MoneyFactory f){
         instance = f;

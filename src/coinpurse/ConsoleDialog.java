@@ -127,8 +127,13 @@ public class ConsoleDialog {
 
     /** Make a Coin (or BankNote or whatever) using requested value. */
     private Valuable makeMoney(double value) {
-        if(value>=20)return new BankNote(value,CURRENCY);
-    	return new Coin(value, CURRENCY);
+        MoneyFactory.setFactory(new ThaiMoneyFactory());
+        MoneyFactory mF = MoneyFactory.getInstance();
+        try{
+            return MoneyFactory.getInstance().createMoney(value);
+        }catch (IllegalArgumentException ex){
+            throw new IllegalArgumentException();
+        }
     }
 
 }

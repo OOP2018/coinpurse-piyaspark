@@ -36,4 +36,8 @@ public class BankNote extends Money{
     public String toString() {
         return String.format("%.0f-%s note [%d]",this.getValue(),this.getCurrency(), serialNumber);
     }
+
+    public static void setNextSerialNumber(long nextSerialNumber){
+        BankNote.nextSerialNumber = nextSerialNumber;
+    }
 }
