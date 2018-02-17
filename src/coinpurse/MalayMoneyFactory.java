@@ -8,9 +8,14 @@ public class MalayMoneyFactory extends MoneyFactory {
     private final String malayCoinCurrency = "Sen";
     private final String malayCurrency = "Ringgit";
 
+    /**
+     * A constructor for MalayMoneyFactory.
+     * Set the serial number for identical.
+     */
     public MalayMoneyFactory(){
         BankNote.setNextSerialNumber(1000000);
     }
+
     /**
      * Create Malaysia money with two types.
      * if value is 0.05,0.1,0.2,0.5, it will create a coin with "Baht" currency.

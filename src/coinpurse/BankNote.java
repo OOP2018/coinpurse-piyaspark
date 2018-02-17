@@ -10,7 +10,7 @@ public class BankNote extends Money{
     private static long nextSerialNumber = 1000000;
 
     /**
-     * a constructor for BankNote.
+     * A constructor for BankNote.
      * @param value is value of the coin such as 1,2,5,10.
      * @param currency is currency of the such as Baht,Dollars,Yen.
      * banknote will have unique serial number that start at 10000000.
@@ -22,7 +22,7 @@ public class BankNote extends Money{
     }
 
     /**
-     * get unique serial number of banknote.
+     * Get unique serial number of banknote.
      * @return serial number of banknote.
      */
     public long getSerial() {
@@ -37,6 +37,10 @@ public class BankNote extends Money{
         return String.format("%.0f-%s note [%d]",this.getValue(),this.getCurrency(), serialNumber);
     }
 
+    /**
+     * Set the next serial number for MoneyFactory.
+     * @param nextSerialNumber
+     */
     public static void setNextSerialNumber(long nextSerialNumber){
         BankNote.nextSerialNumber = nextSerialNumber;
     }

@@ -7,9 +7,14 @@ package coinpurse;
 public class ThaiMoneyFactory extends MoneyFactory {
     private final String thaiCurrency = "Baht";
 
+    /**
+     * A constructor for MalayMoneyFactory.
+     * Set the serial number for identical.
+     */
     public ThaiMoneyFactory(){
         BankNote.setNextSerialNumber(1000000);
     }
+
     /**
      * Create Thai money with two types.
      * if value is 0.25,0.5,1,2,5,10, it will create a coin with "Baht" currency.
