@@ -7,12 +7,19 @@ package coinpurse;
 public abstract class MoneyFactory {
     private static MoneyFactory instance = null;
 
-    protected MoneyFactory(){ }
-
+    /**
+     * Get instance of MoneyFactory.
+     * @return instance.
+     */
     public static MoneyFactory getInstance(){
         return instance;
     }
 
+    /**
+     * Create money from double value.
+     * @param value is value of money in type of double.
+     * @return Valuable.
+     */
     public abstract Valuable createMoney(double value);
 
     /**
@@ -31,7 +38,10 @@ public abstract class MoneyFactory {
         return createMoney(doubleValue);
     }
 
-
+    /**
+     * set MoneyFactory to ThaiMoneyFactory or MalayMoneyFactory.
+     * @param f is MoneyFactory.
+     */
     public static void setFactory(MoneyFactory f){
         instance = f;
     }
