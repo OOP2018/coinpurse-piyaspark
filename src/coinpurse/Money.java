@@ -40,7 +40,8 @@ public class Money implements Valuable{
      * @return integer.
      */
     public int compareTo(Valuable o){
-        return Double.compare(this.value,o.getValue());
+        if (this.getCurrency().equalsIgnoreCase(o.getCurrency())) return Double.compare(this.getValue(),o.getValue());
+        else return this.getCurrency().compareTo(o.getCurrency());
     }
 
     /**

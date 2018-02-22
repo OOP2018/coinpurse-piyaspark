@@ -6,14 +6,7 @@ package coinpurse;
  */
 public class ThaiMoneyFactory extends MoneyFactory {
     private final String thaiCurrency = "Baht";
-
-    /**
-     * A constructor for MalayMoneyFactory.
-     * Set the serial number for identical.
-     */
-    public ThaiMoneyFactory(){
-        BankNote.setNextSerialNumber(1000000);
-    }
+    private long nextSerialNumber = 1000000;
 
     /**
      * Create Thai money with two types.
@@ -25,7 +18,7 @@ public class ThaiMoneyFactory extends MoneyFactory {
     @Override
     public Valuable createMoney(double value) {
         if(value==0.25||value==0.5||value==1||value==2||value==5||value==10)return new Coin(value,thaiCurrency);
-        else if(value==20||value==50||value==100||value==500||value==1000)return new BankNote(value,thaiCurrency);
+        else if(value==20||value==50||value==100||value==500||value==1000)return new BankNote(value,thaiCurrency,nextSerialNumber++);
         else throw new IllegalArgumentException("Can't create Thai money.");
     }
 }

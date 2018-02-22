@@ -7,14 +7,7 @@ package coinpurse;
 public class MalayMoneyFactory extends MoneyFactory {
     private final String malayCoinCurrency = "Sen";
     private final String malayCurrency = "Ringgit";
-
-    /**
-     * A constructor for MalayMoneyFactory.
-     * Set the serial number for identical.
-     */
-    public MalayMoneyFactory(){
-        BankNote.setNextSerialNumber(1000000);
-    }
+    private long nextSerialNumber = 1000000;
 
     /**
      * Create Malaysia money with two types.
@@ -26,7 +19,7 @@ public class MalayMoneyFactory extends MoneyFactory {
     @Override
     public Valuable createMoney(double value) {
         if(value==0.05||value==0.10||value==0.20||value==0.5)return new Coin(value,malayCoinCurrency);
-        else if(value==1||value==2||value==5||value==10||value==20||value==50||value==100)return new BankNote(value,malayCurrency);
+        else if(value==1||value==2||value==5||value==10||value==20||value==50||value==100)return new BankNote(value,malayCurrency,nextSerialNumber++);
         else throw new IllegalArgumentException("Can't create Malaysia money.");
     }
 }
