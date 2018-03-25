@@ -8,8 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Test the Purse using JUnit.
- * This is a JUnit 4 test suite.
+ *
  *
  * IDEs (Eclipse, Netbeans, IntelliJ, BlueJ) include JUnit 4,
  * but you have to tell the IDE to add it to your project as a "Library".
@@ -35,7 +34,7 @@ public class PurseTest {
 
 	/** Make a coin with the default currency. To save typing "new Coin(...)" */
 	private Valuable makeMoney(double value) {
-		if(value>=20)return new BankNote(value,CURRENCY);
+		if(value>=20)return new BankNote(value,CURRENCY,1000000);
 		return new Coin(value,CURRENCY);
 	}
 

@@ -52,9 +52,9 @@ public class MoneyUtil {
         value.add(new Coin(0.5,"Baht"));
         value.add(new Coin(2.0,"Baht"));
         value.add(new Coin(1.0,"Baht"));
-        value.add(new BankNote(50,"Dollar"));
-        value.add(new BankNote(100,"Dollar"));
-        value.add(new BankNote(1000,"Dollar"));
+        value.add(new BankNote(50,"Dollar",1000000));
+        value.add(new BankNote(100,"Dollar",1000000));
+        value.add(new BankNote(1000,"Dollar",1000000));
 
         printValue(value);
         sortValue(value);

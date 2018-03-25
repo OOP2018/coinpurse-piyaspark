@@ -35,7 +35,7 @@ public class Main {
      * @param args not used
      */
     public static void main( String[] args ) {
-        init();
+
     	Purse purse = new Purse(10);
     	ConsoleDialog ui = new ConsoleDialog(purse);
     	ui.run();

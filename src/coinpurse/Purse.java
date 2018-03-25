@@ -1,5 +1,9 @@
 package coinpurse;
 
+import coinpurse.strategy.GreedyWithdraw;
+import coinpurse.strategy.RecursiveWithdraw;
+import coinpurse.strategy.WithdrawStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
@@ -22,6 +26,9 @@ public class Purse {
      */
     private final int capacity;
 
+    /** Withdraw strategy that will use to withdraw.*/
+    private WithdrawStrategy strategy;
+
     /**
      *  Create a purse with a specified capacity.
      *  @param capacity is maximum money you can put in purse.
@@ -29,6 +36,7 @@ public class Purse {
     public Purse( int capacity ) {
         this.capacity = capacity;
         this.money = new ArrayList<>();
+        setWithdrawStrategy(new RecursiveWithdraw());
     }
 
     /**
@@ -95,26 +103,16 @@ public class Purse {
     public Valuable[] withdraw(Valuable amount) {
         if(amount == null)return null;
         if(amount.getValue() < 0 || this.getBalance() < amount.getValue())return null;
-        double amountNeededToWithdraw = amount.getValue();
-        List<Valuable> templist = new ArrayList<>();
+        List<Valuable> templist = strategy.withdraw(amount,money);
         money.sort(comp);
         Collections.reverse(money);
 
-        for(int i = 0;i<=money.size()-1;i++){
-            if(amountNeededToWithdraw>0){
-            if (money.get(i).getCurrency().equalsIgnoreCase(amount.getCurrency())){
-                if(amountNeededToWithdraw - money.get(i).getValue()>=0) {
-                    amountNeededToWithdraw -= money.get(i).getValue();
-                    templist.add(money.get(i));
-            }
-            }else break;
-        }
-        }
-		if ( amountNeededToWithdraw != 0 ) return null;
-        for (Valuable v : templist) money.remove(v);
-        Valuable[] money = new Valuable[templist.size()];
-        return templist.toArray(money) ;
+        if(templist.size()>0) for(Valuable value : templist) money.remove(value);
+        else return null;
 
+        Valuable[] arrayMoney = new Valuable[templist.size()];
+        arrayMoney = templist.toArray(arrayMoney);
+        return arrayMoney;
 	}
 
     public Valuable[] withdraw(double amountNeededToWithdraw){
@@ -127,6 +125,14 @@ public class Purse {
      */
     public String toString() {
     	return String.format("%d money with value %f",count(),getBalance());
+    }
+
+    /**
+     * Set withdraw strategy you want to use.
+     * @param strategy
+     */
+    public void setWithdrawStrategy(WithdrawStrategy strategy){
+        this.strategy = strategy;
     }
 }
 
