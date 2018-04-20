@@ -28,9 +28,9 @@ public class MoneyUtil {
      * @param currency is the currency you want to choose.
      * @return value with the same currency.
      */
-    public static List<Valuable> filterByCurrency(List<Valuable> value, String currency){
-        List<Valuable> sameCurrency = new ArrayList<>();
-        for (Valuable v : value) {
+    public static <E extends Valuable> List<E> filterByCurrency(List<E> value, String currency){
+        List<E> sameCurrency = new ArrayList<>();
+        for (E v : value) {
             if (v.getCurrency().contains(currency))sameCurrency.add(v);
             else continue;
         }
@@ -41,9 +41,18 @@ public class MoneyUtil {
      * sort value in the list by highest to lowest.
      * @param value is all value that in the list.
      */
-    public static void sortValue(List<Valuable> value){
+    public static void sortMoney(List<? extends Valuable> value){
         Comparator<Valuable> comp = new ValueComparator();
         value.sort(comp);
+    }
+
+
+    public static <E extends Comparable<? super E>> E max(E ... args){
+        E max = args[0];
+        for(E a : args){
+            if(max.compareTo(a)<0)max = a;
+        }
+        return max;
     }
 
     public static void main(String[] args) {
@@ -57,7 +66,7 @@ public class MoneyUtil {
         value.add(new BankNote(1000,"Dollar",1000000));
 
         printValue(value);
-        sortValue(value);
+        sortMoney(value);
         printValue(value);
 
         printValue(filterByCurrency(value,"Dollar"));
